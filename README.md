@@ -1,1 +1,1 @@
-# fitness-tracker-merged-code
+# FitnessApp

@@ -1,5 +1,6 @@
 body {
     background-image: linear-gradient(to bottom right, rgb(160, 55, 186), teal); 
+    background-color: red;
    /*background-image: linear-gradient(to bottom right, rgb(63, 238, 230), rgb(252, 68, 69));*/ 
    /*background-image: linear-gradient(to bottom right,  rgb(252, 68, 69), rgb(63, 238, 230));*/
 
@@ -101,12 +102,24 @@ body {
 }
 
 .login {
-    height: 100px;
+    /* height: 100px;
     width: 1300px;
     margin:0 auto;
     margin-bottom: 60px;
-    background-position: 75% 13%;
-    background-image: url("../images/runner12.jpg");
+    background-position: 75% 13%; */
+    
+    /* background-image: url("../images/runner12.jpg"); */
+
+    /* height: 100px;
+    width: 1300px;
+    margin:0 auto;
+    margin-bottom: 60px;
+
+    background-position: 75% 50%;
+    background-image: url("../images/runner9.jpg"); */
+    background-image: url("../images/runner7.jpg");
+    position: relative;
+    top: 140px;
 
 }
 

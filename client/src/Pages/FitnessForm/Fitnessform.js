@@ -1,44 +1,42 @@
 import React, { Component } from "react";
 import API from "../../Utils/API";
-//import { Link } from "react-router-dom";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import {Form, FormControl, FormGroup, ControlLabel, Button} from 'react-bootstrap';
+
 import Jumbotron from "../../Components/Jumbotron";
 import Container from "../../Components/Container";
-import moment from 'moment';
 
 
-class Dataform extends Component {
+
+class Fitnessform extends Component {
+
     state = {
-        activity: '',
-        time: '',
+        activity: "",
+        time: "",
         date: '',
-        notes: ''
-    };
+        notes: "",
+        //profile: "",
 
-   
+    }
+
 
     componentDidMount() {
-        const idtoken = localStorage.getItem('id_token')
-        console.log(idtoken);
-    }
+        //this.setState({ profile: {} });
+        const { userProfile, getProfile } = this.props.auth;
+        if (!userProfile) {
+          getProfile((err, profile) => {
+            this.setState({ profile });
+          });
+        } else {
+          this.setState({ profile: userProfile });
+          console.log(userProfile.sub);
+          localStorage.setItem("user", userProfile.sub);
+        }
+      }
 
 
-    constructor (props) {
-        super(props)
-        this.state = {
-            startDate: moment()
-        };        
-        this.handleChange = this.handleChange.bind(this);
-    }
 
 
-    handleChange(date) {
-        this.setState({
-            startDate:date
-        });
-    }
-   
+    onChange = date => this.setState({ date })
 
 
     handleInputChange = event => {
@@ -46,44 +44,55 @@ class Dataform extends Component {
         this.setState({
             [name]: value
         });
+        this.handleChange = this.handleInputChange.bind(this);
     };
 
     handleFormSubmit = event => {
         event.preventDefault();
-        if(this.state.activity && 
-            this.state.time &&
-            this.state.date) {
-                API.saveData({
-                    tokenID: this.state.tokenID,
-                    activity: this.state.activity,
-                    time: this.state.times,
-                    date: this.state.date,
-                    notes: this.state.notes
-                })
+        if (this.state.activity
+                && this.state.time
+                &&this.state.date) {
+                    API.saveData({
 
-                //.then(res => this.loadData())
+                        tokenID: localStorage.getItem('user'),
+                        activity: this.state.activity,
+                        time: this.state.time,
+                        date: this.state.date,
+                        notes: this.state.notes,
+
+
+                    })
+
                 .then(err => console.log(err));
             }
     };
 
 
     render() {
+
+        
+
         return(
-            
-            <Container fluid>
+           <div>
+            <Container>
                 <row>
                     <Jumbotron>
                         <h1>Enter New Fitness Records</h1>
                     </Jumbotron>
                 </row>
-                <form>
+                <Form onSubmit={this.handleFormSubmit}>
+                <FormGroup>
                     <row>
-                    <label>
-                        Select Your Activity:
-                        <select
-                            name="activity"
+                    
+                    <ControlLabel>
+                        Select Your Workout
+                        </ControlLabel>
+                        <FormControl
                             value={this.state.activity}
-                            onChange={this.handleInputChange}>
+                            onChange={this.handleInputChange}
+                            name="activity"
+                            componentClass="select"
+                            >
                             <option value="Walking">Walking</option>
                             <option value="Lifting">Lifting</option>
                             <option value="Swimming">Swimming</option>
@@ -91,64 +100,88 @@ class Dataform extends Component {
                             <option value="Running">Running</option>
                             <option value="Cycling">Cycling</option>
                             <option value="Rowing">Rowing</option>
-                        </select>
-                    </label>
+
+                        </FormControl>
+                    
                     </row>
                     <row>
-                    <label>
-                        Time Spent Active? (reqired)
-                        <select
+                    <ControlLabel>
+                        Select Workout Duration
+                        </ControlLabel>
+                        <FormControl
                             name="time"
                             value={this.state.time}
-                            onChange={this.handleInputChange}>
+                            onChange={this.handleInputChange}
+                            componentClass="select">
 
-                        <option value="15">15 Minutes</option>
-                        <option value="30">30 Minutes</option>
-                        <option value="45">45 Minutes</option>
-                        <option value="60">1 Hour</option>
-                        <option value="90">90 Minutes</option>
-                        <option value="120">2 Hours</option>    
-                        </select> 
-                    </label>
+                        <option value="15 Minutes">15 Minutes</option>
+                        <option value="30 Minutes">30 Minutes</option>
+                        <option value="45 Minutes">45 Minutes</option>
+                        <option value="1 Hour">1 Hour</option>
+                        <option value="90 Minutes">90 Minutes</option>
+                        <option value="2 Hours">2 Hours</option>
+                        </FormControl>
+                    
                     </row>
                     <row>
-                    <label>
-                        Select Date                       
-                        <DatePicker 
+                        <ControlLabel>
+                            Enter Workout Date
+
+                        </ControlLabel>
+                        <FormControl
+                      
+                            type="text"
                             name="date"
-                            selected={this.state.startDate}
-                            onChange={this.handleChange}
+                            placeholder="MM/DD/YYYY"
+                            value={this.state.date}
+                            onChange={this.handleInputChange}
+                            >
                             
-                        />
-                        
-                    </label> 
+                      
+                        </FormControl>
+
+
                     </row>
                     <row>
-                    <label>
-                        Notes:
+                    <ControlLabel>
+                        Select How You Currently Feel
+                    </ControlLabel>  
 
-                        <textarea
+                      <FormControl
                             name="notes"
                             value={this.state.notes}
                             onChange={this.handleInputChange}
-                         />
-                        
-                    </label>           
+                            componentClass="select">
+
+                        <option value="Great">Great</option>
+                        <option value="Good">Good</option>
+                        <option value="Okay">Okay</option>
+                        <option value="Not So Good">Not So Good</option>
+                        <option value="Awful">Awful</option>
+                        <option value="My Legs Are Broken">My Legs Are Broken</option>
+                        </FormControl>
+
+                    
                     </row>
+                     
                     <row>
-                    <button
-                        disabled={!(
-                            this.state.activity
-                            && this.state.time
-                            && this.state.date
-                        )}
-                        onClick={this.handleFormSubmit}
-                        >Submit New Data</button>
+                    
+                        <Button bsStyle="success"
+                            disabled={!(
+                                this.state.activity
+                                && this.state.time
+                                && this.state.date
+                            )}
+                            onClick={this.handleFormSubmit}
+                            >Submit A New Record New Data</Button>
+                     
                     </row>
-                </form>            
+                  </FormGroup> 
+                </Form>
             </Container>
+        </div>
         )
     }
 }
 
-export default Dataform;
+export default Fitnessform;

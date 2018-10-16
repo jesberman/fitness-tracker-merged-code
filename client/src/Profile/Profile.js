@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Panel, ControlLabel, Glyphicon } from 'react-bootstrap';
-import Chart from "../Chart/Chart";
-import Chart2 from "../Chart/Chart2";
-
 import './Profile.css';
 
 class Profile extends Component {
@@ -15,6 +12,7 @@ class Profile extends Component {
       });
     } else {
       this.setState({ profile: userProfile });
+      console.log({ userProfile });
     }
   }
   render() {
@@ -22,26 +20,24 @@ class Profile extends Component {
     return (
       <div className="container">
         <div className="profile-area">
-          <h1>{profile.name}</h1>
+          {/* <h1>{profile.name}</h1> */}
+
           <Panel header="Profile">
             <img src={profile.picture} alt="profile" />
             <div>
               <ControlLabel><Glyphicon glyph="user" /> Nickname</ControlLabel>
-              <h3>{profile.nickname}</h3>
-              <h3>{profile.name}</h3>
+              <h3>User: {profile.nickname}</h3>
+              <h3>Email: {profile.name}</h3>
 
             </div>
-            <pre id="json-object">{JSON.stringify(profile, null, 2)}</pre>
-            {/* <h3>{profile.nickname}</h3> */}
-            <h1>
-              Test
-              < Chart2>
-              </Chart2>
-            </h1>
+            {/* <pre id="preID">
+              {JSON.stringify(profile, null, 2)}
+            </pre> */}
+            {/* <div>
+              {profile.sub}
+            </div> */}
           </Panel>
-          
         </div>
-
       </div>
     );
   }

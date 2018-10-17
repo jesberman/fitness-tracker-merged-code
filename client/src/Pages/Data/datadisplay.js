@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import API from "../../Utils/API";
-
 import { ListGroupItem, ListGroup } from 'react-bootstrap';
 import './data.css';
+import Chart2 from "../../Chart/Chart2";
 
 
 class Records extends Component {
@@ -88,7 +88,11 @@ class Records extends Component {
                             </div>
                         )
                             : (
+                                <div>
                                 <h3>No Results to Display</h3>
+                                <Chart2>
+                                </Chart2>
+                                </div>
                             )}
                     </div>
                     <div>

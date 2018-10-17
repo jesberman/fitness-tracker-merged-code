@@ -5,6 +5,8 @@ import './style.css';
 import Home from "./Home/Home";
 import JumbotronLogin from "./Login/Jumbotron-login";
 import About from "./About/About";
+import Chart2 from "./Chart/Chart2";
+
 
 
 class App extends Component {
@@ -37,20 +39,7 @@ class App extends Component {
             >
               Home
             </Button>
-            <Button
-              bsStyle="primary"
-              className="btn-margin"
-              onClick={this.goTo.bind(this, 'about')}
-            >
-              About Us
-            </Button>
-            <Button
-              bsStyle="primary"
-              className="btn-margin"
-              onClick={this.goTo.bind(this, 'contact')}
-            >
-              Contact
-            </Button>
+
             {
               !isAuthenticated() && (
                 [
@@ -62,20 +51,37 @@ class App extends Component {
                   >
                     Log In
                   </Button>,
-                  <Button
-                    id="aboutMe"
-                    bsStyle="primary"
-                    classname="btn-margin"
-                    onClick={this.goTo.bind(this, 'AboutMe')}
-                    >About Me</Button>
+                  // <Button
+                  //   id="aboutMe"
+                  //   bsStyle="primary"
+                  //   classname="btn-margin"
+                  //   onClick={this.goTo.bind(this, 'AboutMe')}
+                  //   >About Me</Button>
+
+
                 ]
 
-                )
+              )
             }
             {
               isAuthenticated() && (
-                  [
-                    
+                [
+                  <Button
+                    bsStyle="primary"
+                    className="btn-margin"
+                    onClick={this.goTo.bind(this, 'about')}
+                  >
+                    About Us
+                  </Button>,
+
+                  <Button
+                    bsStyle="primary"
+                    className="btn-margin"
+                    onClick={this.goTo.bind(this, 'contact')}
+                  >
+                    Contact
+                  </Button>,
+
                   <Button
                     bsStyle="primary"
                     className="btn-margin"
@@ -83,50 +89,51 @@ class App extends Component {
                   >
                     Profile
                   </Button>,
-                  
-                  <Button
-                  id="fitnessForm"
-                  bsStyle="primary"
-                  className="btn-margin"
-                  onClick={this.goTo.bind(this, 'Fitnessform')}>
-                  Enter New Records</Button>,
+
 
                   <Button
-                  id="Data"
-                  bsStyle="primary"
-                  className="btn-margin"
-                  onClick={this.goTo.bind(this, 'Data')}>
-                  
-                  View Records</Button>
-                  ]
-                )
+                    id="fitnessForm"
+                    bsStyle="primary"
+                    className="btn-margin"
+                    onClick={this.goTo.bind(this, 'Fitnessform')}>
+                    Enter New Records</Button>,
+
+                  <Button
+                    id="Data"
+                    bsStyle="primary"
+                    className="btn-margin"
+                    onClick={this.goTo.bind(this, 'Data')}>
+
+                    View Records</Button>
+                ]
+              )
             }
             {
               isAuthenticated() && (
-                  <Button
-                    id="qsLogoutBtn"
-                    bsStyle="primary"
-                    className="btn-margin"
-                    onClick={this.logout.bind(this)}
-                  >
-                    Log Out
+                <Button
+                  id="qsLogoutBtn"
+                  bsStyle="primary"
+                  className="btn-margin"
+                  onClick={this.logout.bind(this)}
+                >
+                  Log Out
                   </Button>
 
-                )
+              )
             }
           </Navbar.Header>
         </Navbar>
         <div className="container">
-        {
+          {
             !isAuthenticated() && (
-            <div>
-              <JumbotronLogin />
+              <div>
+                <JumbotronLogin />
 
-            </div>
+              </div>
             )
           }
           {this.props.children}
-          
+
         </div>
       </div>
     );

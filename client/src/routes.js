@@ -11,6 +11,7 @@ import Data from "./Pages/Data/datadisplay";
 import AboutMe from "./Pages/AboutMe/aboutme";
 import About from "./About/About";
 import Contact from "./Contact/Contact";
+import Chart2 from "./Chart/Chart2";
 
 
 const auth = new Auth();
@@ -32,6 +33,7 @@ export const makeMainRoutes = () => {
           <Route path="/FitnessForm" render={(props) => <Fitnessform auth={auth} {...props} />} />
           <Route path="/Data" render={(props) => <Data auth={auth} {...props} />} />
           <Route path="/AboutMe" render={(props) => <AboutMe {...props} />} />
+          <Route path="/Chart" render={(props) => <Chart2 {...props} />} />
 
           <Switch>
 

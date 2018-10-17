@@ -1,1 +1,3 @@
 # FitnessApp
+
+This is a React-based application designed to provide users with a means to record their daily fitness routines and exercises.  Users signup, login, establish a profile, and then begin recording the types of workouts they do, the date a workout took place, and how long a each workout lasted.  The data is uploaded to a Mongo database that retunrs that information to the user's profile, allowing of easy record keeping.

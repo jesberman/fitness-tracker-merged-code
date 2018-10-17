@@ -43,14 +43,14 @@ class About extends Component {
                     </br>
 
                     <li>
-                      Record the number of steps you ran or walked each day
+                      Make daily records of your favorite exercises
                     </li>
 
                     <br>
                     </br>
 
                     <li>
-                      Record journal entries of how your workout went, and how you feel once it is over
+                      Record the type of exercises you do and how long each session lasted
                     </li>
 
                     <br>
